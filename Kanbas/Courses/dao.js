@@ -11,6 +11,13 @@ export function findCoursesForEnrolledUser(userId) {
   return enrolledCourses;
 }
 
+export function findCoursesForUnenrolledUser(userId) {
+  const { courses, enrollments } = Database;
+  const unenrolledCourses = courses.filter((course) =>
+    !enrollments.some((enrollment) => enrollment.user === userId && enrollment.course === course._id));
+  return unenrolledCourses;
+}
+
 export function createCourse(course) {
   const newCourse = { ...course, _id: Date.now().toString() };
   Database.courses = [...Database.courses, newCourse];
@@ -29,4 +36,13 @@ export function updateCourse(courseId, courseUpdates) {
   const course = courses.find((course) => course._id === courseId);
   Object.assign(course, courseUpdates);
   return course;
+}
+
+export function findAllPeopleInCourse(courseId) {
+  const {enrollments, users} = Database;
+
+  const enrolledUsers = users.filter((usr)=>enrollments.some((enrollment) => 
+    enrollment.user === usr._id && enrollment.course === courseId));
+
+  return enrolledUsers;
 }
