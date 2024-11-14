@@ -121,5 +121,5 @@ export default function UserRoutes(app) {
   app.get("/api/users/:userId/courses/enroll", findCoursesForUnenrolledUser);
   app.post("/api/users/:userId/courses/enroll", enrollCourse);
   app.delete("/api/users/:userId/courses/enroll", dropCourse);
-  app.post("/api/users/current/courses", createCourse);
+  app.post("/api/users/:userId/courses", createCourse);
 }
