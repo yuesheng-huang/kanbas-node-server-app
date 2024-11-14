@@ -104,8 +104,6 @@ export default function UserRoutes(app) {
   const dropCourse = (req, res) => {
     const currentUser = req.session["currentUser"];
     const course = req.body;
-    console.log(course);
-    console.log(course._id);
     enrollmentsDao.unenrollUserInCourse(currentUser._id, course._id);
     res.json(course);
   }
