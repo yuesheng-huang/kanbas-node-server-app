@@ -21,6 +21,7 @@ const quizSchema = new mongoose.Schema(
     due_date: Date,
     available_date: Date,
     until_date: Date,
+    publish_status: String,
  },
  { collection: "quiz" }
 );
