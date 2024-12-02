@@ -10,10 +10,13 @@ const quizSchema = new mongoose.Schema(
     points: Number,
     assignment_group: String,
     shuffle_answer: String,
+    has_time_limit: String,
     time_limit: Number,
-    multiple_attempts: String,
+    has_many_attempts: String,
     how_many_attempts: Number,
     show_correct_answer: String,
+    show_answer_date: Date,
+    access_code_required: String,
     access_code: String,
     one_question_at_a_time: String,
     webcam_required: String,
@@ -23,7 +26,7 @@ const quizSchema = new mongoose.Schema(
     until_date: Date,
     publish_status: String,
  },
- { collection: "quiz" }
+ { collection: "quizzes" }
 );
 
 export default quizSchema;
