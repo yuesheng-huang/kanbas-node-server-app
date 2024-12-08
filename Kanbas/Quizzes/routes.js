@@ -1,5 +1,6 @@
 import * as quizzesDao from "./dao.js";
 import * as questionsDao from "../Questions/dao.js";
+import * as attemptsDao from "../Attempts/dao.js";
 
 export default function QuizRoutes(app) {
 
@@ -43,5 +44,28 @@ export default function QuizRoutes(app) {
         };
         const newQuestion = await questionsDao.createQuestion(question);
         res.send(newQuestion);
-      })
+    });
+
+    app.post("/api/quizzes/:quizId/attempts", async (req, res)=> {
+        const { quizId } = req.params;
+        const attempt = {
+          ...req.body,
+          quiz: quizId,
+        };
+        const newAttempt = await attemptsDao.createAttempt(attempt);
+        res.send(newAttempt);
+    });
+
+    app.put("/api/quizzes/:quizId/attempts/:attemptId", async (req, res)=> {
+        const { attemptId } = req.params;
+        const attemptUpdates = req.body;
+        const status = await attemptsDao.updateAttempt(attemptId, attemptUpdates);
+        res.send(status);
+    });
+
+    app.get("/api/quizzes/:quizId/attempts/:attemptId", async (req, res)=> {
+        const { attemptId } = req.params;
+        const attempt = await attemptsDao.getAttempt(attemptId);
+        res.json(attempt);
+    });
 }

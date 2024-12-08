@@ -1,9 +1,17 @@
-import model from "./model";
+import model from "./model.js";
 
 export function createAttempt(attempt) {
-    model.create(attempt);
+    return model.create(attempt);
 }
 
-export function removeAttempt(attemptId) {
-    model.deleteOne(attemptId);
+export function getAttempt(attemptId) {
+    return model.findOne({_id: attemptId});
+}
+
+export function getAttemptsForCourse(courseId) {
+    return model.find({course: courseId});
+}
+
+export function updateAttempt(attemptId, attemptUpdates) {
+    return model.updateOne({_id: attemptId}, attemptUpdates);
 }
