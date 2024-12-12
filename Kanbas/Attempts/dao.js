@@ -12,6 +12,10 @@ export function getAttemptsForCourse(courseId) {
     return model.find({course: courseId});
 }
 
+export function getAttemptsForUser(userId, quizId) {
+    return model.find({user: userId, quiz: quizId});
+}
+
 export function updateAttempt(attemptId, attemptUpdates) {
     return model.updateOne({_id: attemptId}, attemptUpdates);
 }
